@@ -2,6 +2,8 @@ import { DiscordServer } from "@/models/DiscordServer";
 import { v4 as uuid } from "uuid";
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
+import CreateServerForm from "./CreateServerForm";
 
 export default function ServerList(): JSX.Element {
   const [activeServer, setActiveServer] = useState<DiscordServer | undefined>();
@@ -33,7 +35,7 @@ export default function ServerList(): JSX.Element {
         <button
           key={server.id}
           className={`p-0.5 sidebar-icon ${
-            server.id === activeServer?.id ? "selected-icon" : ""
+            server.id === activeServer?.id ? "selected-item" : ""
           }`}
           onClick={() => setActiveServer(server)}
         >
@@ -46,12 +48,24 @@ export default function ServerList(): JSX.Element {
               alt="Server Icon"
             />
           ) : (
-            <span className="rounded-icon bg-gray-600 w-[50px] flex items-center justify-center text-sm">
+            <span
+              key={server.id}
+              className={`rounded-icon bg-[#2b2d31] w-[50px] flex items-center justify-center text-sm hover:bg-[#5865f2] ${
+                server.id === activeServer?.id ? "selected-server-icon" : ""
+              } `}
+            >
               {server.name.charAt(0)}
             </span>
           )}
         </button>
       ))}
+      <Link
+        href={`/?createServer=true`}
+        className="flex items-center justify-center rounded-icon bg-[#2b2d31] p-2 my-2 text-2xl font-light h-12 w-12 text-green-500 hover:bg-green-500 hover:text-white hover:border-radius-1.25 transition-all duration-200"
+      >
+        <span className="inline-block">+</span>
+      </Link>
+      <CreateServerForm />
     </div>
   );
 

@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "images-ext-1.discordapp.net",
       },
+      {
+        protocol: "https",
+        hostname: "getstream.io",
+      },
     ],
   },
 };
